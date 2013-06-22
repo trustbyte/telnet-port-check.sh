@@ -9,7 +9,7 @@ if [ $# -lt 2 ];then
 	exit 1;
 fi
 	s=$(date +%s.%N)
-	check_port=$(nc -z $server $port 2>&1; echo -n "|EXIT:"$?)
+	check_port=$(nc -v -z $server $port 2>&1; echo -n "|EXIT:"$?)
 	IFS="|";
 	exit_code=$(echo -e $check_port|grep "EXIT:"|awk -F":" '{print $2}')
 	result=$(echo $check_port|grep -v "EXIT:")
